@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"github.com/danielgjtan/gin-test/routers/api/v1"
 	"github.com/gin-gonic/gin"
+	"github.com/lzpsqzr/gin-api-example/routers/api/v1"
 	"io"
 	"os"
 )

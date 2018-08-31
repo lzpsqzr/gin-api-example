@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/danielgjtan/gin-test/pkg/setting"
-	"github.com/danielgjtan/gin-test/routers"
 	"github.com/gin-gonic/gin"
+	"github.com/lzpsqzr/gin-api-example/pkg/setting"
+	"github.com/lzpsqzr/gin-api-example/routers"
 	"log"
 	"net/http"
 )

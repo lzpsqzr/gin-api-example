@@ -2,13 +2,28 @@ package v1
 
 import (
 	"fmt"
-	"github.com/danielgjtan/gin-test/pkg/e"
 	"github.com/gin-gonic/gin"
+	"github.com/lzpsqzr/gin-api-example/pkg/e"
+	"time"
 )
 
 type AlertContent struct {
-	Alerts string `json:"alerts" binding:"required"`
+	Status   string `json:"status" binding:"required"`
+	Alerting Alerts `json:"alerts" binding:"required"`
 }
+
+type KV map[string]string
+
+type Alert struct {
+	Status       string    `json:"status"`
+	Labels       KV        `json:"labels"`
+	Annotations  KV        `json:"annotations"`
+	StartsAt     time.Time `json:"startsAt"`
+	EndsAt       time.Time `json:"endsAt"`
+	GeneratorURL string    `json:"generatorURL"`
+}
+
+type Alerts []Alert
 
 func GetTags(c *gin.Context) {
 	c.String(e.HTTP_200_OK, "get")
@@ -25,7 +40,10 @@ func PostTag(c *gin.Context) {
 	c.BindJSON(&alerts)
 	fmt.Println(alerts)
 	// fmt.Println(reflect.TypeOf(buf[0:num]))
-	c.JSON(e.HTTP_201_CREATED, gin.H{"alert": alerts.Alerts})
+	c.JSON(e.HTTP_201_CREATED, gin.H{
+		"alerts": alerts.Alerting,
+		"Status": alerts.Status,
+	})
 }
 
 func PutTag(c *gin.Context) {
